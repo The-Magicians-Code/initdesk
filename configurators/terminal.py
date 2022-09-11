@@ -35,6 +35,8 @@ def setup(hwnd, app_config, monitor):
         print("Window position after moving", x0 - monitor.x, y0 - monitor.y, x1 - monitor.x, y1 - monitor.y)
         print("Unaltered position", win32gui.GetWindowRect(hwnd))
         print("Monitor params", monitor.x, monitor.y, monitor.width, monitor.height)
+    
+    
     # Setup cursor position for scrolling
     # Remember current position
     current_pos = win32api.GetCursorPos()
