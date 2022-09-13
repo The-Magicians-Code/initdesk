@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <app name="Terminal">
+        <cmd>wt</cmd>
+        <wintitle>Ubuntu</wintitle>
+        <monitor_id>1</monitor_id>
+        <fullscreen>true</fullscreen>
+        <location></location>
+        <configurator>terminal</configurator>
+        <configured>false</configured>
+    </app>
+    <app name="Notepad">
+        <cmd>notepad</cmd>
+        <wintitle>Untitled - Notepad</wintitle>
+        <monitor_id>1</monitor_id>
+        <fullscreen>false</fullscreen>
+        <location>10 20 800 500</location>
+        <configurator>notepad</configurator>
+        <configured>false</configured>
+    </app>
+</settings>
