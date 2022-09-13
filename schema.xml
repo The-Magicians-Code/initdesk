@@ -1,0 +1,31 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="settings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="app" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="cmd"/>
+              <xs:element type="xs:string" name="wintitle"/>
+              <xs:element type="xs:integer" name="monitor_id"/>
+              <xs:element type="xs:boolean" name="fullscreen"/>
+              <xs:element name="location" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:integer" name="xmin"/>
+                    <xs:element type="xs:integer" name="ymin"/>
+                    <xs:element type="xs:integer" name="xmax"/>
+                    <xs:element type="xs:integer" name="ymax"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="configurator"/>
+              <xs:element type="xs:boolean" name="configured"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="name" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

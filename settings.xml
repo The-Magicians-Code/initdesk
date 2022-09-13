@@ -5,7 +5,6 @@
         <wintitle>Ubuntu</wintitle>
         <monitor_id>1</monitor_id>
         <fullscreen>true</fullscreen>
-        <location></location>
         <configurator>terminal</configurator>
         <configured>false</configured>
     </app>
@@ -14,7 +13,12 @@
         <wintitle>Untitled - Notepad</wintitle>
         <monitor_id>1</monitor_id>
         <fullscreen>false</fullscreen>
-        <location>10 20 800 500</location>
+        <location>
+            <xmin>10</xmin>
+            <ymin>20</ymin>
+            <xmax>800</xmax>
+            <ymax>500</ymax>
+        </location>
         <configurator>notepad</configurator>
         <configured>false</configured>
     </app>
