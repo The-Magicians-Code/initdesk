@@ -18,6 +18,9 @@ for app in app_settings:
         if len(app_settings[app]["location"]) == 4:
             x0, y0, x1, y1 = app_settings[app]["location"]
             if any(x > monitor.width for x in [x0, x1]) or any(y > monitor.height for y in [y0, y1]):
-                raise ValueError(f"{app}: x/y parameter(s) exceed monitor height/width")
+                raise ValueError(
+                    f"{app}: x/y parameter(s) exceed monitor height/width\n" \
+                    f"Allowed limits: x: 0-{monitor.width}, y: 0-{monitor.width}"
+                )
         if not app_settings[app]["location"]:
             print("Application will be fit to the monitor")

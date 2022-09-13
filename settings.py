@@ -13,7 +13,7 @@ app_settings = {
         "wintitle": "Untitled - Notepad",
         "monitor_id": 1, # None -> 0 aka main monitor
         "fullscreen": False,
-        "location": [],
+        "location": [10, 20, 800, 500],
         "configurator": "notepad"
     }
 }
