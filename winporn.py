@@ -5,10 +5,11 @@ import time
 from importlib import import_module
 from params import read_monitors, colors
 from settings import app_settings
+from validate_settings import valid
 
 # Application name when being run through terminal
 for app in app_settings:
-    # subprocess.Popen(app_settings[app]["cmd"])
+    subprocess.Popen(app_settings[app]["cmd"])
     app_settings[app].update({"configured": False})
 
 open_processes = []
@@ -39,6 +40,9 @@ def callback(hwnd, monitors):
             app_settings[app]["configured"] = True
             open_processes.append(app_settings[app]["wintitle"]) if app_settings[app]["wintitle"] not in open_processes else open_processes
 
-while len(open_processes) != len(app_settings.keys()):
-    time.sleep(1)
-    win32gui.EnumWindows(callback, read_monitors())
+if valid():
+    while len(open_processes) != len(app_settings.keys()):
+        time.sleep(1)
+        win32gui.EnumWindows(callback, read_monitors())
+else:
+    print("Invalid settings config")
