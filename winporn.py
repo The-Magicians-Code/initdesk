@@ -2,7 +2,7 @@ import subprocess
 import win32gui # pip install pywin32
 import time
 from importlib import import_module
-from params import read_monitors, valid_settings, valid_xml, load_settings, colors
+from params import read_monitors, valid_settings, valid_xml, load_settings, colours
 
 open_processes = []
 def callback(hwnd, monitors):
@@ -11,29 +11,20 @@ def callback(hwnd, monitors):
 
     for app in app_settings:
         if app_window_title == app_settings[app]["wintitle"] and app_window_exists and not app_settings[app]["configured"]:            
-            # hwnd = win32gui.FindWindow(None, app_window_title)
             print(f"[\u29D6] Setup: {app}")
+            
             import_module(f"configurators.{app_settings[app]['configurator']}").setup(
                 win32gui.FindWindow(None, app_window_title), 
                 app_settings[app], 
                 monitors[app_settings[app]["monitor_id"]] if app_settings[app]["monitor_id"] != None else monitors[0]
             )
-
-            # if app == "Teams":
-            #     current_size = win32gui.GetWindowRect(hwnd)
-            #     while win32gui.GetWindowRect(hwnd) == current_size:
-            #         win32gui.MoveWindow(hwnd, monitors[0].x, monitors[0].y, monitors[0].width, monitors[0].height, True)
-            #         time.sleep(1)   # Necessary delay
-            #     win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
-            #     print("Setup complete")
-            #     app_settings[app]["configured"] = True
             
-            print(f"[{colors.OKGREEN}\u2713{colors.ENDC}] Setup complete: {app}")
+            print(f"[{colours.OKGREEN}\u2713{colours.ENDC}] Setup complete: {app}")
             app_settings[app]["configured"] = True
+            
         open_processes.append(app_settings[app]["wintitle"]) if app_settings[app]["wintitle"] not in open_processes and app_settings[app]["configured"] else open_processes
 
 if valid_xml():
-    # Application name when being run through terminal
     app_settings = load_settings()
     if valid_settings(app_settings):
         for app in app_settings:
