@@ -9,7 +9,7 @@
         <configured>true</configured>
     </app>
     <app name="Notepad">
-        <cmd>notepad</cmd>
+        <cmd>C:\Windows\notepad.exe</cmd> <!-- or just notepad -->
         <wintitle>Untitled - Notepad</wintitle>
         <monitor_id>1</monitor_id>
         <fullscreen>false</fullscreen>

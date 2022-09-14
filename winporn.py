@@ -4,6 +4,10 @@ import time
 from importlib import import_module
 from params import read_monitors, valid_settings, valid_xml, load_settings, colours
 
+# TODO: Generate a conf file with the current setup, aka you have notepad on first monitor, terminal on second
+# Run winporn.py --get-conf to get the current desktop state as an XML conf file, which can then be launched [@Haigutus]
+# IDEA: https://stackoverflow.com/questions/14394513/win32gui-get-the-current-active-application-name
+
 open_processes = []
 def callback(hwnd, monitors):
     app_window_title = win32gui.GetWindowText(hwnd)
