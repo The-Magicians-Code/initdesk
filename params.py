@@ -1,7 +1,9 @@
 from screeninfo import get_monitors # pip install screeninfo
 from pathlib import Path
 from lxml import etree
+import win32process
 import xmltodict
+import wmi
 
 def read_monitors():
     """Read monitor configuration from the system
@@ -124,6 +126,42 @@ def load_settings():
             settings[d['settings']['app'][i]['@name']].update({key: setval})
 
     return settings
+
+# c = wmi.WMI()
+
+def get_app_path(hwnd):
+    """Get applicatin path given hwnd."""
+    try:
+        _, pid = win32process.GetWindowThreadProcessId(hwnd)
+        for p in wmi.WMI().query('SELECT ExecutablePath FROM Win32_Process WHERE ProcessId = %s' % str(pid)):
+            exe = p.ExecutablePath
+            break
+    except:
+        return None
+    else:
+        return exe
+
+def get_app_name(hwnd):
+    """Get applicatin filename given hwnd."""
+    try:
+        _, pid = win32process.GetWindowThreadProcessId(hwnd)
+        for p in wmi.WMI().query('SELECT Name FROM Win32_Process WHERE ProcessId = %s' % str(pid)):
+            exe = p.Name
+            break
+    except:
+        return None
+    else:
+        return exe
+
+ignore = [
+    "BBar",
+    "Settings",
+    "CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+    "Malwarebytes Tray Application",
+    "Microsoft Text Input Application",
+    "C:\Program Files\Rainmeter\Rainmeter.exe",
+    "Program Manager"
+]
 
 class colours:
     """Colours for custom terminal messages

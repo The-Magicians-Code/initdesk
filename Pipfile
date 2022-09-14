@@ -8,6 +8,7 @@ screeninfo = "*"
 lxml = "*"
 pywin32 = "==225"
 xmltodict = "*"
+wmi = "*"
 
 [dev-packages]
 
