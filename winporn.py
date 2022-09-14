@@ -1,16 +1,8 @@
 import subprocess
 import win32gui # pip install pywin32
 import time
-# from screeninfo import get_monitors # pip install screeninfo
 from importlib import import_module
-from params import read_monitors, colors
-from settings import app_settings
-from validate_settings import valid
-
-# Application name when being run through terminal
-for app in app_settings:
-    subprocess.Popen(app_settings[app]["cmd"])
-    app_settings[app].update({"configured": False})
+from params import read_monitors, valid_settings, valid_xml, load_settings, colors
 
 open_processes = []
 def callback(hwnd, monitors):
@@ -38,11 +30,20 @@ def callback(hwnd, monitors):
             
             print(f"[{colors.OKGREEN}\u2713{colors.ENDC}] Setup complete: {app}")
             app_settings[app]["configured"] = True
-            open_processes.append(app_settings[app]["wintitle"]) if app_settings[app]["wintitle"] not in open_processes else open_processes
+        open_processes.append(app_settings[app]["wintitle"]) if app_settings[app]["wintitle"] not in open_processes and app_settings[app]["configured"] else open_processes
 
-if valid():
-    while len(open_processes) != len(app_settings.keys()):
-        time.sleep(1)
-        win32gui.EnumWindows(callback, read_monitors())
+if valid_xml():
+    # Application name when being run through terminal
+    app_settings = load_settings()
+    if valid_settings(app_settings):
+        for app in app_settings:
+            if not app_settings[app]["configured"]:
+                subprocess.Popen(app_settings[app]["cmd"])
+
+        while len(open_processes) != len(app_settings.keys()):
+            time.sleep(1)
+            win32gui.EnumWindows(callback, read_monitors())
+    else:
+        print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
 else:
-    print("Invalid settings config")
+    print("Settings XML validation: FAILED")

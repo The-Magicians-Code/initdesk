@@ -6,7 +6,7 @@
         <monitor_id>1</monitor_id>
         <fullscreen>true</fullscreen>
         <configurator>terminal</configurator>
-        <configured>false</configured>
+        <configured>true</configured>
     </app>
     <app name="Notepad">
         <cmd>notepad</cmd>
