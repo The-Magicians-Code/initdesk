@@ -59,7 +59,7 @@ def callback2(hwnd, s):
                     "cmd": get_app_path(hwnd),
                     "wintitle": app_window_title,
                     "monitor_id": None,
-                    "fullscreen": 1 if tup[1] == win32con.SW_SHOWMAXIMIZED else 0,
+                    "fullscreen": int(tup[1] == win32con.SW_SHOWMAXIMIZED),
                     "location": {
                         "xmin": xmin,
                         "ymin": ymin,

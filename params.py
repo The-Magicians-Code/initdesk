@@ -160,7 +160,8 @@ ignore = [
     "Malwarebytes Tray Application",
     "Microsoft Text Input Application",
     "C:\Program Files\Rainmeter\Rainmeter.exe",
-    "Program Manager"
+    "Program Manager",
+    "Setup"
 ]
 
 class colours:
