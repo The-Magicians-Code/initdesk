@@ -187,4 +187,8 @@ def convert(input_data):
     :return: XML list
     :rtype: list of str
     """
-    return [unparse({"settings": i}, pretty=True) for i in input_data]
+    # return [unparse({"settings": i}, pretty=True) for i in input_data]
+    # with open("settings.xml") as f:
+    #     k = xmltodict.parse(f.read())
+    return unparse(input_data, pretty=True) #, full_document=False)
+    # return k

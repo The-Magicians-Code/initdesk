@@ -31,26 +31,30 @@ def callback(hwnd, monitors):
 ########################################################################################### TO IMPLEMENT
 import win32con
 from params import convert
-json = []
+json = {
+    "settings": {
+        "app": []
+    }
+}
+
 def callback2(hwnd, s):
     app_window_title = win32gui.GetWindowText(hwnd)
     app_window_exists = win32gui.IsWindowVisible(hwnd)
     if app_window_exists and app_window_title:
-        # if get_app_path(hwnd) not in ignore and app_window_title not in ignore:
-        window = win32gui.FindWindow(None, app_window_title)
-        xmin, ymin, xmax, ymax = win32gui.GetWindowRect(hwnd)
-        if window:
-            tup = win32gui.GetWindowPlacement(window)
-            if tup[1] == win32con.SW_SHOWMAXIMIZED:
-                k = "maximized"
-            elif tup[1] == win32con.SW_SHOWMINIMIZED:
-                k = "minimized"
-            elif tup[1] == win32con.SW_SHOWNORMAL:
-                k = "normal"
-            # print(app_window_title, get_app_path(hwnd), win32gui.GetWindowRect(hwnd), k)
-            
-            d = {
-                "app": { 
+        if get_app_path(hwnd) not in ignore and app_window_title not in ignore:
+            window = win32gui.FindWindow(None, app_window_title)
+            xmin, ymin, xmax, ymax = win32gui.GetWindowRect(hwnd)
+            if window:
+                tup = win32gui.GetWindowPlacement(window)
+                if tup[1] == win32con.SW_SHOWMAXIMIZED:
+                    k = "maximized"
+                elif tup[1] == win32con.SW_SHOWMINIMIZED:
+                    k = "minimized"
+                elif tup[1] == win32con.SW_SHOWNORMAL:
+                    k = "normal"
+                # print(app_window_title, get_app_path(hwnd), win32gui.GetWindowRect(hwnd), k)
+                
+                d = { 
                     "@name": str(app_window_title).split(' ')[-1],
                     "cmd": get_app_path(hwnd),
                     "wintitle": app_window_title,
@@ -62,12 +66,11 @@ def callback2(hwnd, s):
                         "xmax": xmax,
                         "ymax": ymax
                     },
-                    "configurator": None,
+                    "configurator": "notepad",
                     "configured": False
                 }
-            }
-            # print(d)
-            json.append(d)
+                # print(d)
+                json["settings"]["app"].append(d)
 ########################################################################################### TO IMPLEMENT
 
 if valid_xml():
