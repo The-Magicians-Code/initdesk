@@ -30,36 +30,60 @@ def callback(hwnd, monitors):
 
 ########################################################################################### TO IMPLEMENT
 import win32con
-
+from params import convert
+json = []
 def callback2(hwnd, s):
     app_window_title = win32gui.GetWindowText(hwnd)
     app_window_exists = win32gui.IsWindowVisible(hwnd)
     if app_window_exists and app_window_title:
-        if get_app_path(hwnd) not in ignore and app_window_title not in ignore:
-            window = win32gui.FindWindow(None, app_window_title)
-            if window:
-                tup = win32gui.GetWindowPlacement(window)
-                if tup[1] == win32con.SW_SHOWMAXIMIZED:
-                    k = "maximized"
-                elif tup[1] == win32con.SW_SHOWMINIMIZED:
-                    k = "minimized"
-                elif tup[1] == win32con.SW_SHOWNORMAL:
-                    k = "normal"
-                print(app_window_title, get_app_path(hwnd), win32gui.GetWindowRect(hwnd), k)
+        # if get_app_path(hwnd) not in ignore and app_window_title not in ignore:
+        window = win32gui.FindWindow(None, app_window_title)
+        xmin, ymin, xmax, ymax = win32gui.GetWindowRect(hwnd)
+        if window:
+            tup = win32gui.GetWindowPlacement(window)
+            if tup[1] == win32con.SW_SHOWMAXIMIZED:
+                k = "maximized"
+            elif tup[1] == win32con.SW_SHOWMINIMIZED:
+                k = "minimized"
+            elif tup[1] == win32con.SW_SHOWNORMAL:
+                k = "normal"
+            # print(app_window_title, get_app_path(hwnd), win32gui.GetWindowRect(hwnd), k)
+            
+            d = {
+                "app": { 
+                    "@name": str(app_window_title).split(' ')[-1],
+                    "cmd": get_app_path(hwnd),
+                    "wintitle": app_window_title,
+                    "monitor_id": None,
+                    "fullscreen": 1 if tup[1] == win32con.SW_SHOWMAXIMIZED else 0,
+                    "location": {
+                        "xmin": xmin,
+                        "ymin": ymin,
+                        "xmax": xmax,
+                        "ymax": ymax
+                    },
+                    "configurator": None,
+                    "configured": False
+                }
+            }
+            # print(d)
+            json.append(d)
 ########################################################################################### TO IMPLEMENT
 
 if valid_xml():
-    # win32gui.EnumWindows(callback2, None)
+    win32gui.EnumWindows(callback2, None)
+    # print(json)
+    print(convert(json))
     app_settings = load_settings()
-    if valid_settings(app_settings):
-        for app in app_settings:
-            if not app_settings[app]["configured"]:
-                subprocess.Popen(app_settings[app]["cmd"])
+    # if valid_settings(app_settings):
+    #     for app in app_settings:
+    #         if not app_settings[app]["configured"]:
+    #             subprocess.Popen(app_settings[app]["cmd"])
 
-        while len(open_processes) != len(app_settings.keys()):
-            time.sleep(1)
-            win32gui.EnumWindows(callback, read_monitors())
-    else:
-        print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
+    #     while len(open_processes) != len(app_settings.keys()):
+    #         time.sleep(1)
+    #         win32gui.EnumWindows(callback, read_monitors())
+    # else:
+    #     print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
 else:
     print("Settings XML validation: FAILED")

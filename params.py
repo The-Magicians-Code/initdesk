@@ -174,3 +174,17 @@ class colours:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
+
+from xmltodict import unparse
+
+def convert(input_data):
+    """
+    Convert JSON to XML
+
+    :param input_data: The incoming json document as a list
+    :type input_data: list of str
+
+    :return: XML list
+    :rtype: list of str
+    """
+    return [unparse({"settings": i}, pretty=True) for i in input_data]
