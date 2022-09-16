@@ -86,7 +86,7 @@ def prepare_location(location, monitor):
 # https://xmlschema.readthedocs.io/en/latest/usage.html#data-decoding-and-encoding
 # https://www.freeformatter.com/xsd-generator.html#before-output
 
-def valid_xml():
+def valid_xml(settings_file):
     """Validate XML settings file, using a predefined XSD schema
 
     Returns:
@@ -94,7 +94,7 @@ def valid_xml():
     """
     
     xml_schema_doc = etree.parse("schema.xsd")
-    xml_doc = etree.parse("settings.xml")
+    xml_doc = etree.parse(settings_file)
     xml_schema = etree.XMLSchema(xml_schema_doc)
     status = xml_schema.validate(xml_doc)
     if xml_schema.error_log:
@@ -102,14 +102,14 @@ def valid_xml():
     
     return status
 
-def load_settings():
+def load_settings(settings_file):
     """Load and parse settings from validated XML settings file to JSON
 
     Returns:
         dict: Settings in JSON format
     """
     
-    with open("settings.xml", "r") as f:
+    with open(settings_file, "r") as f:
         d = xmltodict.parse(f.read())
 
     if not isinstance(d['settings']['app'], list):
