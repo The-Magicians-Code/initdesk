@@ -20,7 +20,7 @@ def callback(hwnd, monitors):
             import_module(f"configurators.{app_settings[app]['configurator']}").setup(
                 win32gui.FindWindow(None, app_window_title),
                 app_settings[app], 
-                monitors[app_settings[app]["monitor_id"]] if app_settings[app]["monitor_id"] != None else monitors[0]
+                monitors[app_settings[app]["monitor_id"]] if "monitor_id" in app_settings[app] else 0
             )
             
             print(f"[{colours.OKGREEN}\u2713{colours.ENDC}] Setup complete: {app}")
@@ -58,7 +58,7 @@ def callback2(hwnd, s):
                     "@name": str(app_window_title).split(' ')[-1],
                     "cmd": get_app_path(hwnd),
                     "wintitle": app_window_title,
-                    "monitor_id": None,
+                    # "monitor_id": None,
                     "fullscreen": int(tup[1] == win32con.SW_SHOWMAXIMIZED),
                     "location": {
                         "xmin": xmin,
@@ -73,20 +73,26 @@ def callback2(hwnd, s):
                 json["settings"]["app"].append(d)
 ########################################################################################### TO IMPLEMENT
 
-if valid_xml():
-    win32gui.EnumWindows(callback2, None)
-    # print(json)
-    print(convert(json))
-    app_settings = load_settings()
-    # if valid_settings(app_settings):
-    #     for app in app_settings:
-    #         if not app_settings[app]["configured"]:
-    #             subprocess.Popen(app_settings[app]["cmd"])
+SAVE_CONFIG = 1
+LOAD_CONFIG = 0
+if __name__ == "__main__":
+    if SAVE_CONFIG:
+        win32gui.EnumWindows(callback2, None)
+        with open("settings2.xml", "w") as f:
+            f.write(convert(json))
 
-    #     while len(open_processes) != len(app_settings.keys()):
-    #         time.sleep(1)
-    #         win32gui.EnumWindows(callback, read_monitors())
-    # else:
-    #     print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
-else:
-    print("Settings XML validation: FAILED")
+    if LOAD_CONFIG:
+        if valid_xml():                
+            app_settings = load_settings()
+            if valid_settings(app_settings):
+                for app in app_settings:
+                    if not app_settings[app]["configured"]:
+                        subprocess.Popen(app_settings[app]["cmd"])
+
+                while len(open_processes) != len(app_settings.keys()):
+                    time.sleep(1)
+                    win32gui.EnumWindows(callback, read_monitors())
+            else:
+                print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
+        else:
+            print("Settings XML validation: FAILED")

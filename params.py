@@ -18,7 +18,7 @@ def read_monitors():
 
     return [main_monitor, *left, *right]
 
-def valid_settings(app_settings):
+def valid_settings(app_settings, monitors=read_monitors()):
     """Validates set parameters if XML validation is passed
 
     Args:
@@ -28,18 +28,16 @@ def valid_settings(app_settings):
         bool: True if settings are valid else returns an error
     """
     
-    monitors = read_monitors()
-
     for app in app_settings:
         if not app_settings[app]["configured"]:
             try:
-                monitor = monitors[app_settings[app]["monitor_id"]] if app_settings[app]["monitor_id"] != None else monitors[0]
+                monitor = monitors[app_settings[app]["monitor_id"]] if "monitor_id" in app_settings[app] else 0
             except IndexError:
                 print(f"[{app}] -> {IndexError.__name__}: Invalid monitor index: Available are 0-{len(monitors) - 1}\n")
                 print("Available monitors from left to right, starting with main:", *monitors, sep="\n - ")
             if app_settings[app]["fullscreen"]:
                 print(f"Application: {app} will be set to fullscreen mode on the monitor, ignoring any set location variables")
-            elif "location" in app_settings[app]:
+            elif "location" in app_settings[app] and "monitor_id" in app_settings[app]:
                 x0, y0, x1, y1 = app_settings[app]["location"]
                 if any(x > monitor.width for x in [x0, x1]) or any(y > monitor.height for y in [y0, y1]):
                     raise ValueError(
@@ -66,16 +64,23 @@ def prepare_location(location, monitor):
     Returns:
         list, list: Top left corner and application window size
     """
-    
     x0, y0, x1, y1 = location
-    top_left = [
-        monitor.x + x0, 
-        monitor.y + y0
-    ]
+    if monitor:
+        top_left = [
+            monitor.x + x0, 
+            monitor.y + y0
+        ]
+    else:
+        top_left = [
+            x0, 
+            y0
+        ]
+        
     size = [
         x1 - x0, 
         y1 - y0
     ]
+
     return top_left, size
 
 # https://xmlschema.readthedocs.io/en/latest/usage.html#data-decoding-and-encoding
@@ -106,7 +111,10 @@ def load_settings():
     
     with open("settings.xml", "r") as f:
         d = xmltodict.parse(f.read())
-    
+
+    if not isinstance(d['settings']['app'], list):
+        d['settings']['app'] = [d['settings']['app']]
+        
     settings = {}
     bools = {'true': True, 'false': False}
     for i in range(len(d['settings']['app'])):
@@ -126,8 +134,6 @@ def load_settings():
             settings[d['settings']['app'][i]['@name']].update({key: setval})
 
     return settings
-
-# c = wmi.WMI()
 
 def get_app_path(hwnd):
     """Get applicatin path given hwnd."""
@@ -176,20 +182,14 @@ class colours:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
 
-from xmltodict import unparse
-
 def convert(input_data):
     """
     Convert JSON to XML
 
-    :param input_data: The incoming json document as a list
-    :type input_data: list of str
+    :param input_data: The incoming json document
+    :type input_data: dict
 
-    :return: XML list
-    :rtype: list of str
+    :return: XML file
+    :rtype: str
     """
-    # return [unparse({"settings": i}, pretty=True) for i in input_data]
-    # with open("settings.xml") as f:
-    #     k = xmltodict.parse(f.read())
-    return unparse(input_data, pretty=True) #, full_document=False)
-    # return k
+    return xmltodict.unparse(input_data, pretty=True)

@@ -7,7 +7,7 @@
             <xs:sequence>
               <xs:element type="xs:string" name="cmd"/>
               <xs:element type="xs:string" name="wintitle"/>
-              <xs:element type="xs:integer" name="monitor_id"/>
+              <xs:element type="xs:integer" name="monitor_id" minOccurs="0" maxOccurs="1"/>
               <xs:element type="xs:boolean" name="fullscreen"/>
               <xs:element name="location" minOccurs="0" maxOccurs="1">
                 <xs:complexType>

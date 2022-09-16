@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+	<app name="Chrome">
+		<cmd>C:\Program Files\Google\Chrome\Application\chrome.exe</cmd>
+		<wintitle>Siseveeb - Avaleht - Google Chrome</wintitle>
+		<fullscreen>0</fullscreen>
+		<location>
+			<xmin>-1402</xmin>
+			<ymin>-398</ymin>
+			<xmax>-137</xmax>
+			<ymax>992</ymax>
+		</location>
+		<configurator>notepad</configurator>
+		<configured>false</configured>
+	</app>
+</settings>
