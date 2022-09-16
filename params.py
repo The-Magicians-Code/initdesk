@@ -118,7 +118,7 @@ def load_settings(settings_file):
     settings = {}
     bools = {'true': True, 'false': False}
     for i in range(len(d['settings']['app'])):
-        settings.update({d['settings']['app'][i]['@name']:{}})
+        settings.update({d['settings']['app'][i]['@name']: {}})
         for key in d['settings']['app'][i]:
             if key == '@name':
                 continue    # Skip every operation in this loop
