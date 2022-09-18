@@ -20,6 +20,6 @@
             <ymax>500</ymax>
         </location>
         <configurator>notepad</configurator>
-        <configured>false</configured>
+        <configured>true</configured>
     </app>
 </settings>
