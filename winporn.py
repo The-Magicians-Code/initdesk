@@ -75,7 +75,7 @@ if __name__ == "__main__" and os.name == "nt":
             f.write(convert(json))
 
     if LOAD_CONFIG:
-        set_file = "settings2.xml"
+        set_file = "settings.xml"
         if valid_xml(set_file):                
             app_settings = load_settings(set_file)
             if valid_settings(app_settings):
