@@ -2,6 +2,7 @@ import subprocess
 import win32con
 import win32gui # pip install pywin32
 import time
+import os
 from importlib import import_module
 from params import read_monitors, valid_settings, valid_xml, load_settings, convert, get_app_path, colours, ignore
 
@@ -38,10 +39,11 @@ def load_config(hwnd, monitors):
             
             print(f"[{colours.OKGREEN}\u2713{colours.ENDC}] Setup complete: {app}")
             app_settings[app]["configured"] = True
-            
-        open_processes.append(app_settings[app]["wintitle"]) if app_settings[app]["wintitle"] not in open_processes and app_settings[app]["configured"] else open_processes
+        
+        if app_settings[app]["wintitle"] not in open_processes and app_settings[app]["configured"]:
+            open_processes.append(app_settings[app]["wintitle"])
 
-def save_config(hwnd, s):
+def save_config(hwnd, _):
     app_window_title = win32gui.GetWindowText(hwnd)
     app_window_exists = win32gui.IsWindowVisible(hwnd)
     if app_window_exists and app_window_title:
@@ -66,14 +68,14 @@ def save_config(hwnd, s):
                 }
                 json["settings"]["app"].append(d)
                 
-if __name__ == "__main__":
+if __name__ == "__main__" and os.name == "nt":
     if SAVE_CONFIG:
         win32gui.EnumWindows(save_config, None)
         with open("settings.xml", "w") as f:
             f.write(convert(json))
 
     if LOAD_CONFIG:
-        set_file = "settings.xml"
+        set_file = "settings2.xml"
         if valid_xml(set_file):                
             app_settings = load_settings(set_file)
             if valid_settings(app_settings):
@@ -88,3 +90,5 @@ if __name__ == "__main__":
                 print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
         else:
             print("Settings XML validation: FAILED")
+else:
+    print("You're not running it on Windows, you blithering idiot!")

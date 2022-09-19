@@ -10,7 +10,7 @@
 			<xmax>-137</xmax>
 			<ymax>992</ymax>
 		</location>
-		<configurator>notepad</configurator>
+		<configurator>template</configurator>
 		<configured>false</configured>
 	</app>
 </settings>

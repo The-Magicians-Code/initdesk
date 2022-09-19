@@ -6,20 +6,20 @@
         <monitor_id>1</monitor_id>
         <fullscreen>true</fullscreen>
         <configurator>terminal</configurator>
-        <configured>false</configured>
+        <configured>true</configured>
     </app>
     <app name="Notepad">
         <cmd>C:\Windows\notepad.exe</cmd> <!-- or just notepad -->
         <wintitle>Untitled - Notepad</wintitle>
         <monitor_id>2</monitor_id>
-        <fullscreen>false</fullscreen>
+        <fullscreen>true</fullscreen>
         <location>
             <xmin>10</xmin>
             <ymin>20</ymin>
             <xmax>800</xmax>
             <ymax>500</ymax>
         </location>
-        <configurator>notepad</configurator>
-        <configured>true</configured>
+        <configurator>template</configurator>
+        <configured>false</configured>
     </app>
 </settings>

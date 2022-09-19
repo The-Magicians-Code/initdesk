@@ -4,6 +4,7 @@ from lxml import etree
 import win32process
 import xmltodict
 import wmi
+import os
 
 process_location = Path(__file__).resolve().parent
 
@@ -180,6 +181,7 @@ class colours:
     """Colours for custom terminal messages
     """
     
+    os.system('color')
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
     OKGREEN = '\033[92m'
