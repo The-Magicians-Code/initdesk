@@ -1,5 +1,6 @@
 import subprocess
 import win32con
+import argparse
 import win32gui # pip install pywin32
 import time
 import os
@@ -13,9 +14,22 @@ from params import read_monitors, valid_settings, valid_xml, load_settings, conv
 # TODO: Create a terminal prompt for saving conf or running it
 # IDEA: If conf file in terminal prompt, then load it, else save with default name
 
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--load",
+    type=str,
+    help="Settings configuration (XML) file to be loaded for automatic desktop configuration <settings.xml> for example",
+    default="settings.xml"
+)
+parser.add_argument(
+    "--save",
+    type=str,
+    help="Settings configuration (XML) file which will be used for desktop configuration saving procedure <settings.xml> for example",
+    default="settings.xml"
+)
+args = parser.parse_args()
+
 # Globals
-SAVE_CONFIG = 0
-LOAD_CONFIG = not SAVE_CONFIG
 open_processes = []
 json = {
     "settings": {
@@ -63,19 +77,19 @@ def save_config(hwnd, _):
                         "xmax": xmax,
                         "ymax": ymax
                     },
-                    "configurator": "notepad",
+                    "configurator": "template",
                     "configured": False
                 }
                 json["settings"]["app"].append(d)
                 
 if __name__ == "__main__" and os.name == "nt":
-    if SAVE_CONFIG:
+    if args.save:
         win32gui.EnumWindows(save_config, None)
-        with open("settings.xml", "w") as f:
+        with open(args.save, "w") as f:
             f.write(convert(json))
 
-    if LOAD_CONFIG:
-        set_file = "settings.xml"
+    if args.load:
+        set_file = args.load
         if valid_xml(set_file):                
             app_settings = load_settings(set_file)
             if valid_settings(app_settings):
