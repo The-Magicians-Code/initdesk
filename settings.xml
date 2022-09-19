@@ -11,8 +11,8 @@
     <app name="Notepad">
         <cmd>C:\Windows\notepad.exe</cmd> <!-- or just notepad -->
         <wintitle>Untitled - Notepad</wintitle>
-        <monitor_id>2</monitor_id>
-        <fullscreen>true</fullscreen>
+        <monitor_id>0</monitor_id>
+        <fullscreen>false</fullscreen>
         <location>
             <xmin>10</xmin>
             <ymin>20</ymin>

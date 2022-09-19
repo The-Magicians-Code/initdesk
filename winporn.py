@@ -19,13 +19,13 @@ parser.add_argument(
     "--load",
     type=str,
     help="Settings configuration (XML) file to be loaded for automatic desktop configuration <settings.xml> for example",
-    default="settings.xml"
+    default=""
 )
 parser.add_argument(
     "--save",
     type=str,
     help="Settings configuration (XML) file which will be used for desktop configuration saving procedure <settings.xml> for example",
-    default="settings.xml"
+    default=""
 )
 args = parser.parse_args()
 
@@ -88,7 +88,7 @@ if __name__ == "__main__" and os.name == "nt":
         with open(args.save, "w") as f:
             f.write(convert(json))
 
-    if args.load:
+    elif args.load:
         set_file = args.load
         if valid_xml(set_file):                
             app_settings = load_settings(set_file)
@@ -104,5 +104,7 @@ if __name__ == "__main__" and os.name == "nt":
                 print("Settings XML validation: SUCCESS, settings parameters JSON validation: FAILED")
         else:
             print("Settings XML validation: FAILED")
+    else:
+        print("I got nothing")
 else:
     print("You're not running it on Windows, you blithering idiot!")
