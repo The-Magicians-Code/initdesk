@@ -5,12 +5,15 @@ import win32process
 import xmltodict
 import wmi
 
+process_location = Path(__file__).resolve().parent
+
 def read_monitors():
     """Read monitor configuration from the system
 
     Returns:
         list: List of monitors, main first, then left, then right ones
     """
+    
     list_monitors = get_monitors()
     main_monitor = [monitor for monitor in list_monitors if monitor.is_primary][0]
     left = [monitor for monitor in list_monitors if [monitor.x, monitor.y] < [main_monitor.x, main_monitor.y]]
@@ -48,7 +51,7 @@ def valid_settings(app_settings, monitors=read_monitors()):
                     raise ValueError("x0 / y0 can't be bigger than x1 / y1, you pillock!")
             elif "location" not in app_settings[app]:
                 print(f"Application: {app} will be enlarged and set to windowed mode on the monitor")
-            if not Path(f'configurators/{app_settings[app]["configurator"]}.py').is_file():
+            if not (process_location / f'configurators/{app_settings[app]["configurator"]}.py').is_file():
                 raise FileNotFoundError(f"{app} configurator: {app_settings[app]['configurator']} does not exist")
         else:
             print(f"Application {app} configured: {app_settings[app]['configured']}, ignoring setup")
@@ -64,6 +67,7 @@ def prepare_location(location, monitor):
     Returns:
         list, list: Top left corner and application window size
     """
+    
     x0, y0, x1, y1 = location
     if monitor:
         top_left = [
@@ -93,8 +97,8 @@ def valid_xml(settings_file):
         bool: True if successful validation
     """
     
-    xml_schema_doc = etree.parse("schema.xsd")
-    xml_doc = etree.parse(settings_file)
+    xml_schema_doc = etree.parse(str(process_location / "schema.xsd"))
+    xml_doc = etree.parse(str(process_location / settings_file))
     xml_schema = etree.XMLSchema(xml_schema_doc)
     status = xml_schema.validate(xml_doc)
     if xml_schema.error_log:
@@ -109,7 +113,7 @@ def load_settings(settings_file):
         dict: Settings in JSON format
     """
     
-    with open(settings_file, "r") as f:
+    with open(str(process_location / settings_file), "r") as f:
         d = xmltodict.parse(f.read())
 
     if not isinstance(d['settings']['app'], list):
@@ -137,6 +141,7 @@ def load_settings(settings_file):
 
 def get_app_path(hwnd):
     """Get applicatin path given hwnd."""
+    
     try:
         _, pid = win32process.GetWindowThreadProcessId(hwnd)
         for p in wmi.WMI().query('SELECT ExecutablePath FROM Win32_Process WHERE ProcessId = %s' % str(pid)):
@@ -149,6 +154,7 @@ def get_app_path(hwnd):
 
 def get_app_name(hwnd):
     """Get applicatin filename given hwnd."""
+    
     try:
         _, pid = win32process.GetWindowThreadProcessId(hwnd)
         for p in wmi.WMI().query('SELECT Name FROM Win32_Process WHERE ProcessId = %s' % str(pid)):
@@ -192,4 +198,5 @@ def convert(input_data):
     :return: XML file
     :rtype: str
     """
+    
     return xmltodict.unparse(input_data, pretty=True)
