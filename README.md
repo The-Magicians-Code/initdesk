@@ -12,6 +12,7 @@ For the pyromaniacs, we've got a solution like [this](https://github.com/bmrf/tr
 > TLDR: MicroSoft can, yet again, go fuck themselves
 
 ## The fuck is this then?
+![image](https://user-images.githubusercontent.com/60236942/191240641-540820dd-3010-4bc7-aa1e-81c526600440.png)
 I'm glad you asked. Picture this, you're at work. You're booting up your computer and you had a ton of applications open yesterday, now you'd like them to be at the same spot where they were, right? Wouldn't that be nice? We both know the answer to that. But since Windows has the memory of a middle aged chimp and no idea what an application window is, it just throws everything up like an anorexic who just shoveled in a slice of banana cake and threw it up the minute the second they realised it was them in the mirror. Which is why I've created a script, which in layman's terms, takes a screenshot of your current state in the desktop and saves it into a configuration file which can then be loaded into the script to set up everything the way it was. Simple, innit? Yet the nobs at a certain company could not make something like this and integrate it to the system. Nothing new this day and age.
 ## Installation
 Get [python](https://www.python.org/downloads/release/python-396/)  
