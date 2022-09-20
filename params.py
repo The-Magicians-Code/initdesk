@@ -39,6 +39,7 @@ def valid_settings(app_settings, monitors=read_monitors()):
             except IndexError:
                 print(f"[{app}] -> {IndexError.__name__}: Invalid monitor index: Available are 0-{len(monitors) - 1}\n")
                 print("Available monitors from left to right, starting with main:", *monitors, sep="\n - ")
+                return False
             if app_settings[app]["fullscreen"]:
                 print(f"Application: {app} will be set to fullscreen mode on the monitor, ignoring any set location variables")
             elif "location" in app_settings[app] and "monitor_id" in app_settings[app]:
