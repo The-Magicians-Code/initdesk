@@ -69,7 +69,6 @@ def save_config(hwnd, _):
                     "@name": str(app_window_title).split(' ')[-1],
                     "cmd": get_app_path(hwnd),
                     "wintitle": app_window_title,
-                    # "monitor_id": None,
                     "fullscreen": int(win32gui.GetWindowPlacement(window)[1] == win32con.SW_SHOWMAXIMIZED),
                     "location": {
                         "xmin": xmin,
