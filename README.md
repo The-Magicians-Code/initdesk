@@ -11,6 +11,9 @@ and
 For the pyromaniacs, we've got a solution like [this](https://github.com/bmrf/tron/blob/master/resources/stage_4_repair/disable_windows_telemetry/purge_windows_10_telemetry.bat).
 > TLDR: MicroSoft can, yet again, go fuck themselves
 
+![image](https://user-images.githubusercontent.com/60236942/191252000-c9352d3f-5022-4381-925e-f0afc864f60d.png)
+
+
 ## The fuck is this then?
 <p align="center">
   <img src="https://user-images.githubusercontent.com/60236942/191240641-540820dd-3010-4bc7-aa1e-81c526600440.png?raw=true"/>
