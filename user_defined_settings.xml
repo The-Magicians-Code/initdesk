@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <app name="Terminal">   <!-- Customiseable name -->
+        <cmd>wt</cmd>   <!-- Command Prompt executable name -->
+        <wintitle>Ubuntu</wintitle>     <!-- Window name -->
+        <monitor_id>1</monitor_id>      <!-- Monitor number 0 is main monitor, then starting from leftmost to right -->
+        <fullscreen>true</fullscreen>   <!-- Set application to fullscreen mode -->
+        <configurator>terminal</configurator>   <!-- Configurator name from configurators folder, these can be custom made -->
+        <configured>false</configured>  <!-- Can be set to true, then this application will be ignored in the setup phase -->
+    </app>
+    <app name="Notepad">
+        <cmd>C:\Windows\notepad.exe</cmd>   <!-- or Command Prompt executable path -->
+        <wintitle>Untitled - Notepad</wintitle>
+        <monitor_id>0</monitor_id>
+        <fullscreen>false</fullscreen>
+        <location>  <!-- When defined, then all subparameters must be defined as well -->
+            <xmin>10</xmin> <!-- If monitor_id is given, then these positions are considered within the specified monitor area -->
+            <ymin>20</ymin> <!-- Otherwise they are generated as absolute coordinates related to the main monitor position -->
+            <xmax>800</xmax>
+            <ymax>500</ymax>
+        </location>
+        <configurator>template</configurator>   <!-- Default configurator -->
+        <configured>false</configured>
+    </app>
+</settings>

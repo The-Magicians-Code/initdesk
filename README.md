@@ -20,5 +20,7 @@ Get [python](https://www.python.org/downloads/release/python-396/)
 ## Usage
 ``pipenv run python winporn.py --load settings_file.xml`` Loads the settings file and initiates the setup accordingly  
 ``pipenv run python winporn.py --save my_desktop.xml`` Saves the current desktop setup to a specified file on the disk  
+>Keep the settings files in the same folder with the script, it won't run otherwise (no point really)
 ## Settings files
-Based on [XML](https://en.wikipedia.org/wiki/XML) format, can be easily modified according to the needs
+Based on the [XML](https://en.wikipedia.org/wiki/XML) format, can be easily modified according to specified needs.  
+They are validated by the script and the [XSD](https://en.wikipedia.org/wiki/XML_Schema_(W3C)) file.

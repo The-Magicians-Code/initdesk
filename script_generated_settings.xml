@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+	<app name="Chrome">
+		<cmd>C:\Program Files\Google\Chrome\Application\chrome.exe</cmd>
+		<wintitle>Google</wintitle>
+		<fullscreen>0</fullscreen>
+		<location>
+			<xmin>-1402</xmin>	<!-- No monitor_id defined, therefore coordinates are relative to the main monitor position -->
+			<ymin>-398</ymin>
+			<xmax>-137</xmax>
+			<ymax>992</ymax>
+		</location>
+		<configurator>default</configurator>
+		<configured>false</configured>
+	</app>
+</settings>

@@ -1,3 +1,6 @@
+# This is the template file for window configuration, user can add extra inputs or mouse interactions and what have you
+# Check terminal.py for example on mouse scrolling
+
 # Default imports
 import win32gui
 import win32api
@@ -5,6 +8,7 @@ import win32con
 from params import colours, prepare_location
 
 def setup(hwnd, app_config, monitor):
+    ####################################### DEFAULT SETTINGS
     if monitor and app_config["fullscreen"]:
         # Set to screen
         win32gui.MoveWindow(hwnd, monitor.x, monitor.y, monitor.width, monitor.height, True)
@@ -18,3 +22,4 @@ def setup(hwnd, app_config, monitor):
     if app_config["fullscreen"]:
         win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
         print("Fullscreen configured")
+    ####################################### DEFAULT END
