@@ -1,10 +1,10 @@
-This is a solution for a problem that has still, to this day, remained unsolved because of the incompetency and blind ignorance of a group of "genius" individuals who would refer to themselves as part of a "brilliancy" called MicroSoft. Which is of course the reason for being a straight up cunt to people who have, in good faith, invested their money into a product that they expected to be complete and fully functional. Yet here we are, instead of fixing things, that are actually necessary, you imbeciles decide to bloat the system with shite that noone will either realise it exists or and most likely will never use.  
+This is a solution for a problem that has still, to this day, remained unsolved because of the incompetency and blind ignorance of a group of "genius" individuals who would refer to themselves as part of a "brilliancy" called MicroSoft. Which is of course the reason for being a straight up cunt to people who have, in good faith, invested their money into a product that they expected to be complete and fully functional. Yet here we are, instead of fixing things, that are actually necessary, you imbeciles decide to bloat the system with shite that no one will either realise it exists or and most likely will never use.  
 Still wondering? Not a problem, there you have it, halfwits:
 [here](https://www.makeuseof.com/microsoft-windows-11-file-explorer-ads/),
 [here](https://www.reddit.com/r/Windows11/comments/qs96dp/ayy_microsoft_can_you_please_stop_widgets_from/),
 [here](https://www.reddit.com/r/pcgaming/comments/cz17bw/psa_check_your_cortana_usage_right_now_if_its_up/),
 [here](https://www.reddit.com/r/Windows10/comments/f09184/how_to_block_bing_search_in_windows_10_start_menu/),
-[here](https://answers.microsoft.com/en-us/windows/forum/all/windows-10-updates-during-active-hours-while-im/07dee705-e3e8-43af-9b6c-b6fdf91b9005)
+[here](https://answers.microsoft.com/en-us/windows/forum/all/windows-10-updates-during-active-hours-while-im/07dee705-e3e8-43af-9b6c-b6fdf91b9005),
 [here](https://www.reddit.com/r/Windows10/comments/ofkmzm/why_arent_windows_updates_and_telemetry_data_opt/)
 and
 [here](https://np.reddit.com/r/privacy/comments/cici51/how_much_does_microsoft_spy_on_its_users_via/ev4pvxb/).  
